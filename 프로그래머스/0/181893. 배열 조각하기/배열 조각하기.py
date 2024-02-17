@@ -1,9 +1,7 @@
 def solution(arr, query):
-    j=0
-    for i in query:
-        if j % 2 == 0:
-            arr = arr[:i+1]
+    for i,j in enumerate(query):
+        if i % 2 == 0:
+            arr = arr[:j+1]
         else:
-            arr = arr[i:]
-        j+=1
+            arr = arr[j:]
     return arr
