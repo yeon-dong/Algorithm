@@ -1,6 +1,2 @@
 def solution(myString):
-    answer = []
-    myString = myString.split('x')
-    for i in myString:
-        answer.append(len(i))
-    return answer
+    return [ len(a) for a in myString.split('x') ]
