@@ -1,15 +1,9 @@
 function solution(rsp) {
-    var answer = '';
-    for(let i = 0; i < rsp.length; i++){
-        if(rsp[i] == 0){
-            answer += 5;
-        }
-        else if(rsp[i] == 2){
-            answer += 0;
-        }
-        else{
-            answer += 2;
-        }
-    }
+    let win = {
+        2: 0,
+        0: 5,
+        5: 2
+    };
+    var answer = [...rsp].map(v => win[v]).join("");
     return answer;
 }
