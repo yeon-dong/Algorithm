@@ -1,6 +1,3 @@
 function solution(num, k) {
-    num = String(num);
-    const mapfn = (arg) => Number(arg);
-    const newArr = num.split('').map(mapfn);
-    return newArr.indexOf(k) < 0 ? -1 : newArr.indexOf(k) + 1;
+    return num.toString().split("").map((el) => Number(el)).indexOf(k) < 0 ? -1 : num.toString().split("").map((el) => Number(el)).indexOf(k) + 1;
 }
