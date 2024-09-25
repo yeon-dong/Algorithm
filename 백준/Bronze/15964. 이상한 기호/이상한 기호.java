@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 public class Main {
 
-    static int special_sum( int a, int b){
+    static long special_sum( long a, long b){
         return ((a + b) * (a - b));
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        int b = sc.nextInt();
+        long a = sc.nextLong();
+        long b = sc.nextLong();
         System.out.println(special_sum(a,b));
     }
 }
