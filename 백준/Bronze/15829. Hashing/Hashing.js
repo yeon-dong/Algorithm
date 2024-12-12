@@ -1,37 +1,14 @@
-const fs = require("fs");
-const input = fs.readFileSync(0).toString().split("\n");
-let n = parseInt(input[0]);
-hash = input[1];
-let answer = 0;
-alphabet = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
-];
-for (let i = 0; i < 5; i++) {
-  answer += (alphabet.indexOf(hash[i]) + 1) * 31 ** i;
+const fs = require('fs');
+const [n, str] = fs.readFileSync("./dev/stdin").toString().trim().split("\n");
+
+const N = +n
+let hash = 0;
+let r = 1;
+for (let i = 0; i < N; i++) {
+  hash += (str.charCodeAt(i) - 96) * r
+  hash %= 1234567891;
+  r *= 31
+  r %= 1234567891;
 }
-console.log(answer);
+
+console.log(hash)
