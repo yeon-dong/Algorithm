@@ -1,24 +1,13 @@
-const fs = require("fs");
-const input = fs
-  .readFileSync("/dev/stdin")
-  .toString()
-  .trim()
-  .split("\n")
-  .map((ip) => ip.trim());
+const [a, b] = require("fs").readFileSync("/dev/stdin").toString().trim().split(" ").map(Number);
+let i = a;
+let j = b;
 
-let [a, b] = input[0].split(" ").map(Number);
-
-let maxDivide = 0;
-let minMulti = 0;
-for (let i = 1; i <= a * b; i++) {
-  if (a % i == 0 && b % i == 0) {
-    maxDivide = i;
-  }
-  if (i % a == 0 && i % b == 0) {
-    minMulti = i;
-    break;
-  }
+while (i % j !== 0) {
+    let n = i % j;
+    if (n !== 0) {
+        i = j;
+        j = n;
+    }
 }
-
-console.log(maxDivide);
-console.log(minMulti);
+console.log(j)
+console.log(a*b/j)
