@@ -1,21 +1,72 @@
-const [N, K] = require("fs").readFileSync(0).toString().trim().split(" ").map(Number);
-
-const que = [[N,0]];
-const visited = Array(100001).fill(false);
-
-while (que.length !== 0){
-  const [now, time] = que.shift();
-  
-  visited[now] = true; // 방문 처리
-  
-  if(now === K){ // 같으면 출력
-    console.log(time);
-    break;
+const fs = require('fs');
+const [N,K] = fs.readFileSync("./dev/stdin").toString().trim().split(" ").map(v=>+v);
+class Node{
+  constructor(item){
+    this.item = item;
+    this.next = null;
   }
-  for (next of [now - 1, now + 1, now * 2]) {
-    if (!visited[next] && next >= 0 && next <= 100000) {
-      visited[next] = 1;
-      que.push([next, time + 1]);
+}
+
+class Queue{
+constructor(){
+  this.head = null; 
+  this.tail = null; 
+  // this.length = 0; 
+}
+
+push(item){
+  const node = new Node(item);
+  if(this.head==null){
+    this.head = node;
+  }else{
+    this.tail.next = node;
+  }
+
+  this.tail = node; 
+  // this.length +=1; 
+}
+
+pop(){
+  const popItem = this.head;
+  this.head = this.head.next; 
+  // this.length -=1; 
+  return popItem.item; 
+}
+}
+
+function check(n){
+  return !isVisited[n]
+}
+
+
+
+let answer = 0;
+let isVisited = new Array(100001).fill(false);
+
+
+let q = new Queue();
+q.push([N,0]);
+isVisited[N] = true;
+
+while(true){
+  let [now,sec] = q.pop();
+  if(now==K){
+    answer = sec;
+    break; 
+  }else{
+    if(now-1>=0 && check(now-1)){
+      isVisited[now-1] = true; 
+      q.push([now-1,sec+1])
+    }
+    if(now+1<100001 && check(now+1)){
+      isVisited[now+1] = true; 
+      q.push([now+1,sec+1])
+    }
+    if(now*2<100001 && check(now*2)){
+      isVisited[now*2] = true; 
+      q.push([now*2,sec+1])
     }
   }
 }
+
+console.log(answer)
