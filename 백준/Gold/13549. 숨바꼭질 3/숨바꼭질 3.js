@@ -58,19 +58,22 @@ class Queue{
 }
 
 const queue = new Queue;
+const visited = new Array(100002).fill(false);
 queue.push([N,0]);
-const visited = new Array(100002).fill(0);
-while (queue.length) {
+while(queue.length){
   const [now, time] = queue.shift();
-  if (now === K) {console.log(time); break;}
-  for (next of [now * 2, now - 1, now + 1]) {
-    if (!visited[next] && next >= 0 && next <= 100000) {
-      visited[next] = 1;
-      if (next == now * 2) {
-        queue.unshift([next, time]); // 2X로 이동할 때는 시간을 증가시키지 않고, 우선순위를 반영하여 큐의 맨 앞에 넣어준다.
-      } else {
-        queue.push([next, time + 1]); // X-1, X+1로 이동할 때는 시간을 증가시키고, 큐에 순서대로 넣어준다.
-      }
+  if(now == K){
+    console.log(time);
+    break;
+  }
+  if(now * 2 > 0 && now * 2 <= 100000 && !visited[now * 2]){
+    visited[now * 2] = true;
+    queue.unshift([now * 2, time]);
+  }
+  for(i of [now-1,now+1]){
+    if(i >= 0 && i <= 100000 && !visited[i]){
+      visited[i] = true;
+      queue.push([i,time + 1]);
     }
   }
 }
